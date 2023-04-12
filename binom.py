@@ -4,7 +4,7 @@ from read_epi import data
 
 row, column = data.shape
 # probability of having a cancer cell
-p = 0.5
+p = 0.2
 # defining the list of r values
 r_values = list(range(row + 1))
 # obtaining the mean and variance
