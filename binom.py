@@ -4,11 +4,8 @@ from scipy.stats import nbinom
 import matplotlib.pyplot as plt, seaborn as sns
 import numpy as np
 import statsmodels.api as sm
-from sklearn.decomposition import PCA
-from read_epi import data
 import pandas as pd
 warnings.filterwarnings('ignore')
-pca = PCA(n_components=2)
 
 data = pd.read_csv("Brain_GSE50161.csv")
 data = data.to_numpy()
@@ -23,7 +20,7 @@ def get_hist_and_indices(X, i):
     return sample, hist
 
 
-sample, hist = get_hist_and_indices(data, 4)
+sample, hist = get_hist_and_indices(data, 3)
 
 print(sample.mean())
 print(sample.var())
@@ -36,7 +33,7 @@ print(res.summary)
 mu = np.exp(res.params[0])
 p = 1/(1+np.exp(res.params[0])*res.params[1])
 n = np.exp(res.params[0])*p/(1-p)
-x_plot = np.linspace(0,14,15)
+x_plot = np.linspace(0,20,21)
 sns.set_theme()
 ax = sns.distplot(sample, kde=False, norm_hist=True, label='Real Values')
 ax.plot(x_plot, nbinom.pmf(x_plot, n, p), 'g-', lw=2, label = 'fitted NB')
